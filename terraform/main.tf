@@ -98,10 +98,6 @@ resource "azurerm_postgresql_flexible_server" "main" {
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
 
-  high_availability {
-    mode = "Disabled"
-  }
-
   tags = azurerm_resource_group.main.tags
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.postgres]
