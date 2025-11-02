@@ -218,3 +218,12 @@ resource "azurerm_container_registry" "main" {
   sku                 = "Basic"
   admin_enabled       = "true"
 }
+
+# Log Analytics Workspace (required for Container Apps)
+resource "azurerm_log_analytics_workspace" "main" {
+  name                = "${local.service_name}-${var.environment}-logs"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}

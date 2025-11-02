@@ -79,18 +79,23 @@ output "acr_name" {
   value       = azurerm_container_registry.main.name
 }
 
-output "acr_rg_name" {
-  description = "Resource group of the Azure Container Registry"
-  value       = azurerm_container_registry.main.resource_group_name
+output "acr_login_server" {
+  description = "Login server URL for the Azure Container Registry"
+  value       = azurerm_container_registry.main.login_server
 }
 
 output "acr_admin_username" {
-  description = "Username of the Azure Container Registry"
-  value = azurerm_container_registry.main.admin_username
+  description = "Admin username for the Azure Container Registry"
+  value       = azurerm_container_registry.main.admin_username
 }
 
 output "acr_admin_password" {
-  description = "Password of the Azure Container Registry"
-  value = azurerm_container_registry.main.admin_password
-  sensitive = true
+  description = "Admin password for the Azure Container Registry"
+  value       = azurerm_container_registry.main.admin_password
+  sensitive   = true
+}
+
+output "log_analytics_workspace_id" {
+  description = "ID of the Log Analytics Workspaxce"
+  value       = azurerm_log_analytics_workspace.main.id
 }
