@@ -54,6 +54,13 @@ resource "azurerm_subnet" "postgres" {
   service_endpoints = ["Microsoft.Storage"]
 }
 
+resource "azurerm_subnet" "container_apps" {
+  name                 = "${local.service_name}-container-apps-subnet"
+  resource_group_name  = azurerm_resource_group.main.name
+  virtual_network_name = azurerm_virtual_network.main.name
+  address_prefixes     = ["10.0.4.0/23"]  # /23 gives you ~512 IPs
+}
+
 resource "azurerm_subnet" "private_endpoints" {
   name                 = "${local.service_name}-private-endpoints-subnet"
   resource_group_name  = azurerm_resource_group.main.name
@@ -201,4 +208,13 @@ resource "azurerm_network_security_group" "base" {
   }
 
   tags = azurerm_resource_group.main.tags
+}
+
+# Azure container registry
+resource "azurerm_container_registry" "main" {
+  name                = "${replace(local.service_name, "-", "")}acr"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  sku                 = "Basic"
+  admin_enabled       = "true"
 }

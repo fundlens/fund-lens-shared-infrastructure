@@ -3,6 +3,11 @@ output "resource_group_name" {
   value       = azurerm_resource_group.main.name
 }
 
+output "location" {
+  description = "Location of the resource group"
+  value       = azurerm_resource_group.main.location
+}
+
 output "vnet_id" {
   description = "ID of the virtual network"
   value       = azurerm_virtual_network.main.id
@@ -16,6 +21,11 @@ output "vnet_name" {
 output "vm_subnet_id" {
   description = "ID of the VM subnet"
   value       = azurerm_subnet.vm.id
+}
+
+output "container_apps_subnet_id" {
+  description = "ID of the Container Apps subnet"
+  value       = azurerm_subnet.container_apps.id
 }
 
 output "private_endpoint_subnet_id" {
@@ -62,4 +72,25 @@ output "storage_connection_string" {
 output "base_nsg_id" {
   description = "ID of the base network security group"
   value       = azurerm_network_security_group.base.id
+}
+
+output "acr_name" {
+  description = "Name of the Azure Container Registry"
+  value       = azurerm_container_registry.main.name
+}
+
+output "acr_rg_name" {
+  description = "Resource group of the Azure Container Registry"
+  value       = azurerm_container_registry.main.resource_group_name
+}
+
+output "acr_admin_username" {
+  description = "Username of the Azure Container Registry"
+  value = azurerm_container_registry.main.admin_username
+}
+
+output "acr_admin_password" {
+  description = "Password of the Azure Container Registry"
+  value = azurerm_container_registry.main.admin_password
+  sensitive = true
 }
